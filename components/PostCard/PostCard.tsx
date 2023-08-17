@@ -7,12 +7,13 @@ import {
   useWindowDimensions,
   View 
 } from 'react-native';
+import { stampToTime } from '../../common/functions';
 import RenderHtml, { defaultSystemFonts } from 'react-native-render-html';
 const systemFonts = [...defaultSystemFonts, 'Josefin Sans'];
 
 type PostCardProps = PropsWithChildren<{
   title: string;
-  date?: string;
+  date?: number;
 }>;
 
 export const PostCard = ({children, date, title}: PostCardProps): ReactNode => {
@@ -23,11 +24,18 @@ export const PostCard = ({children, date, title}: PostCardProps): ReactNode => {
       <View
         style={styles.postCardHeader}
       >
-        <Text
-          style={styles.postCardHeaderText}
-        >
-          {title}
-        </Text>
+        {title&&!date
+          ?<Text
+            style={styles.postCardHeaderText}
+          >
+            {title}
+          </Text>
+          :<Text
+            style={styles.postCardHeaderDate}
+          >
+            {stampToTime(date!)}
+          </Text>
+        }
       </View>
       <View
         style={styles.postCardContent}
@@ -61,6 +69,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Josefin Sans Bold',
     paddingTop: 12,
     paddingBottom: 12,
+  },
+  postCardHeaderDate: {
+    fontFamily: 'Josefin Sans',
+    color: "#666",
+    alignSelf: "flex-start",
+    paddingTop: 12,
+    paddingBottom: 12,
+    paddingLeft: 14
   },
   postCardContent: {
     margin: 10,

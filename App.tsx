@@ -11,7 +11,7 @@ import {
 
 import { Header } from './components/Header/Header';
 import { PostCard } from './components/PostCard/PostCard';
-import type { UserClean } from './common/types';
+import type { Post, UserClean } from './common/types';
 
 function App(): JSX.Element {
 
@@ -33,6 +33,7 @@ function App(): JSX.Element {
         timestamp: 0
       }
   })
+  const [ posts, setPosts ] = useState<Post[]>([]);
 
   const getUserData = async() => {
     try {
@@ -44,8 +45,19 @@ function App(): JSX.Element {
     }
   }
 
+  const getPosts = async() => {
+    try {
+      const response = await fetch('https://pg.mccullo.ug/api/post/fetch');
+      const json = await response.json();
+      setPosts(json.additionalPosts);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     getUserData();
+    getPosts();
   },[])
 
   const isDarkMode = useColorScheme() === 'dark';
@@ -81,6 +93,15 @@ function App(): JSX.Element {
           <PostCard title="Patrick Glendon McCullough">
             {userData.site_description||"Loading..."}
           </PostCard>
+          {posts.map((post: Post) => 
+            <PostCard 
+              key={post._id}
+              date={post.created}
+              title=""
+            >
+              {post.content}
+            </PostCard>
+          )}
         </ImageBackground>
       </ScrollView>
     </SafeAreaView>
