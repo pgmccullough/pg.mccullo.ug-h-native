@@ -1,21 +1,21 @@
-import type { ReactNode } from 'react';
-
-const ImageBackground = require('react-native/Libraries/Image/ImageBackground');
-const StyleSheet = require('react-native/Libraries/StyleSheet/StyleSheet');
-const Text = require('react-native/Libraries/Text/Text');
-const useColorScheme = require('react-native/Libraries/Utilities/useColorScheme');
-import { View } from 'react-native';
-import { HeaderBar } from './HeaderBar';
 import React from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 
-export const Header = (): ReactNode => {
-  const isDarkMode = useColorScheme === 'dark';
+import { Text, ImageBackground, StyleSheet, useColorScheme } from 'react-native';
+import { HeaderBar } from './HeaderBar';
+import type { UserClean } from '../../common/types';
+import { stampToTime } from '../../common/functions';
+
+type HeaderProps = PropsWithChildren<UserClean>;
+
+export const Header = ({cover_image, profile_image, site_name, watchword}: HeaderProps): ReactNode => {
+  const isDarkMode = useColorScheme() === 'dark';
   return (
     <>
       <ImageBackground
         accessibilityRole="image"
         testID="new-app-screen-header"
-        source={{uri: "https://pg.mccullo.ug/api/media/images/user/cover/715b82a2-a057-4ce1-90ac-2d0479d1ccde.jpg"}}
+        source={{uri: `https://pg.mccullo.ug${cover_image.image}`}}
         style={[
           styles.background
         ]}
@@ -25,24 +25,24 @@ export const Header = (): ReactNode => {
             styles.headerH1
           ]}
         >
-          empire
+          {watchword.word}
           {"\n"}
         </Text>
         <Text
           style={[
             styles.headerCover
           ]}>
-            cover: August 16, 2023 at 9:00am
+            cover: {stampToTime((cover_image?.timestamp||0)/1000)||""}
         </Text>
         <Text
           style={[
             styles.headerProfile
           ]}>
-          profile: August 16, 2023 at 8:59am
+          profile: {stampToTime((profile_image?.timestamp||0)/1000)||""}
         </Text>
       </ImageBackground>
       <ImageBackground
-        source={{uri: "https://pg.mccullo.ug/api/media/images/user/profile/f5c09b71-5b65-4b97-b322-3815619fa304.jpg"}}
+        source={{uri: `https://pg.mccullo.ug${profile_image.image}`}}
         style={
           styles.headerProfileImage
         }

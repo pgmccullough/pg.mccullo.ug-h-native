@@ -1,11 +1,14 @@
-import type { ReactNode } from 'react';
-import type {PropsWithChildren} from 'react';
-
-const StyleSheet = require('react-native/Libraries/StyleSheet/StyleSheet');
-const Text = require('react-native/Libraries/Text/Text');
-const useColorScheme = require('react-native/Libraries/Utilities/useColorScheme');
-import { View } from 'react-native';
 import React from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
+import { 
+  StyleSheet, 
+  Text, 
+  useColorScheme, 
+  useWindowDimensions,
+  View 
+} from 'react-native';
+import RenderHtml, { defaultSystemFonts } from 'react-native-render-html';
+const systemFonts = [...defaultSystemFonts, 'Josefin Sans'];
 
 type PostCardProps = PropsWithChildren<{
   title: string;
@@ -13,7 +16,8 @@ type PostCardProps = PropsWithChildren<{
 }>;
 
 export const PostCard = ({children, date, title}: PostCardProps): ReactNode => {
-  const isDarkMode = useColorScheme === 'dark';
+  const isDarkMode = useColorScheme() === 'dark';
+  const { width } = useWindowDimensions();
   return (
     <>
       <View
@@ -28,11 +32,13 @@ export const PostCard = ({children, date, title}: PostCardProps): ReactNode => {
       <View
         style={styles.postCardContent}
       >
-        <Text
-          style={styles.postCardContentText}
-        >
-          {children}
-        </Text>
+      <RenderHtml
+        baseStyle={{fontSize: 16, fontFamily: 'Josefin Sans', lineHeight: 24, padding: 16}}
+        contentWidth={width}
+        source={{html: children?.toString()||""}}
+        systemFonts={systemFonts}
+      />
+    
     </View>
     </>
   );
