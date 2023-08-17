@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { stampToTime } from '../../common/functions';
 import RenderHtml, { defaultSystemFonts } from 'react-native-render-html';
-const systemFonts = [...defaultSystemFonts, 'Josefin Sans'];
+const systemFonts = [...defaultSystemFonts, 'JosefinSans-Regular'];
 
 type PostCardProps = PropsWithChildren<{
   title: string;
@@ -41,7 +41,7 @@ export const PostCard = ({children, date, title}: PostCardProps): ReactNode => {
         style={styles.postCardContent}
       >
       <RenderHtml
-        baseStyle={{fontSize: 16, fontFamily: 'Josefin Sans', lineHeight: 24, padding: 16}}
+        baseStyle={{fontSize: 16, fontFamily: 'JosefinSans-Regular', lineHeight: 24, padding: 16}}
         contentWidth={width}
         source={{html: children?.toString()||""}}
         systemFonts={systemFonts}
@@ -66,12 +66,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   postCardHeaderText: {
-    fontFamily: 'Josefin Sans Bold',
+    fontFamily: 'JosefinSans-Bold',
     paddingTop: 12,
     paddingBottom: 12,
   },
   postCardHeaderDate: {
-    fontFamily: 'Josefin Sans',
+    fontFamily: 'JosefinSans-Regular',
     color: "#666",
     alignSelf: "flex-start",
     paddingTop: 12,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     padding: 12,
     paddingTop: 24,
     paddingBottom: 24,
-    fontFamily: 'Josefin Sans',
+    fontFamily: 'JosefinSans-Regular',
     fontSize: 16,
     lineHeight: 24
   }

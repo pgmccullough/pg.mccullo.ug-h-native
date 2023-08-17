@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
   headerBarText: {
-    fontFamily: 'Josefin Sans',
+    fontFamily: 'JosefinSans-Regular',
     fontSize: 21,
     color: '#fff'
   }

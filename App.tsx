@@ -82,12 +82,12 @@ function App(): JSX.Element {
           watchword={userData.watchword}
         />
         <ImageBackground
-          source={require('./assets/images/bgPattern.png')}
+          source={require('./assets/images/bg_pattern.png')}
           style={{
             backgroundColor: '#eee',
             minHeight: 400,
           }}
-          imageStyle={{resizeMode: 'repeat', transform: "scale(2)"}}
+          imageStyle={{resizeMode: 'repeat', transform: [{scale: 2.75}]}}
         >
           <View style={{marginTop: 16}}/>
           <PostCard title="Patrick Glendon McCullough">

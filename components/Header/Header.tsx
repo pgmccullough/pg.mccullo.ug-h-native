@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   headerH1: {
-    fontFamily: 'Josefin Sans Bold',
+    fontFamily: 'JosefinSans-Bold',
     color: '#fff',
     fontSize: 64,
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     top: 54
   },
   headerCover: {
-    fontFamily: 'Josefin Sans Bold',
+    fontFamily: 'JosefinSans-Regular',
     color: '#fff',
     fontSize: 16,
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     lineHeight: 28
   },
   headerProfile: {
-    fontFamily: 'Josefin Sans Bold',
+    fontFamily: 'JosefinSans-Regular',
     color: '#fff',
     fontSize: 16,
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   headerProfileImage: {
     backgroundColor: '#fff',
     backgroundSize: 'cover',
-    borderWidth: 4,
+    borderWidth: 3,
     borderColor: '#fff',
     borderRadius: 100,
     width: 86,
