@@ -20,10 +20,12 @@ import {
 import {
   Colors,
   DebugInstructions,
-  Header,
+  // Header,
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import Header from './components/Header/Header';
 
 type SectionProps = PropsWithChildren<{
   title: string;
