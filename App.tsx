@@ -19,13 +19,11 @@ import {
 
 import {
   Colors,
-  DebugInstructions,
-  // Header,
-  LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Header from './components/Header/Header';
+const { ImageBackground } = require('react-native');
+import { Header } from './components/Header/Header';
+import { PostCard } from './components/PostCard/PostCard';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -61,7 +59,7 @@ function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: '#eee',
   };
 
   return (
@@ -74,24 +72,21 @@ function App(): JSX.Element {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
-        <View
+        <ImageBackground
+          source={require('./assets/images/bgPattern.png')}
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Welcome">
-            It's <Text style={styles.highlight}>pg.mccullo.ug/h/</Text> in React Native.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
+            backgroundColor: '#eee',
+            minHeight: 400,
+          }}
+          imageStyle={{resizeMode: 'repeat', transform: "scale(2)"}}
+        >
+          <View style={{marginTop: 16}}/>
+          <PostCard title="Patrick Glendon McCullough">
+            The ​East Village Monday through Friday; otherwise Cochecton.
+            {"\n\n"}
+            "Like all his attempts at fiction it would be as personal as a letter—painful to those who knew him, of no interest to those who didn’t."
+          </PostCard>
+        </ImageBackground>
       </ScrollView>
     </SafeAreaView>
   );

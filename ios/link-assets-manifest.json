@@ -56,6 +56,10 @@
     {
       "path": "assets/fonts/JosefinSans-ThinItalic.ttf",
       "sha1": "4d063575e8ef66aed64619ad57b215a931c68d66"
+    },
+    {
+      "path": "assets/images/bgPattern.png",
+      "sha1": "59b4ab4860b7d832e0e47c2dfdb63a1febe44d0e"
     }
   ]
 }
