@@ -19,7 +19,7 @@ export const Gallery = ({ media, width }: GalleryProps): ReactNode => {
   if(media?.images) mediaArray = [...mediaArray, ...media.images]
   
   const [ currentSlide, setCurrentSlide ] = useState<number>(1);
-  const [ playing, setPlaying ] = useState(false);
+  const [ playing, setPlaying ] = useState<boolean>(false);
   const firstImage = useRef<Image>(null);
 
   const slide = (dir:"left"|"right") => {
@@ -38,11 +38,6 @@ export const Gallery = ({ media, width }: GalleryProps): ReactNode => {
       setPlaying(false);
     }
   }, []);
-
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
-
 
   return(
     <View>
