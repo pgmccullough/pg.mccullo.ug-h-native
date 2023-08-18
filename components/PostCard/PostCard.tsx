@@ -52,7 +52,7 @@ export const PostCard = ({children, date, media, feedback, title}: PostCardProps
           :""
         }
         <RenderHtml
-          baseStyle={{fontSize: 16, fontFamily: 'JosefinSans-Regular', lineHeight: 24, padding: 16}}
+          baseStyle={{color: "#000", fontSize: 16, fontFamily: 'JosefinSans-Regular', lineHeight: 24, padding: 16}}
           contentWidth={width}
           source={{html: children?.toString()||""}}
           systemFonts={systemFonts}
