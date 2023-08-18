@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import type { PropsWithChildren, ReactNode } from 'react';
 import { 
   Image,
@@ -6,6 +6,7 @@ import {
   Text,
   View
 } from 'react-native';
+import YouTubePlayer from "react-native-youtube-iframe";
 import type { PostFeedback, PostMedia } from '../../common/types';
 
 type GalleryProps = PropsWithChildren<{
@@ -18,6 +19,7 @@ export const Gallery = ({ media, width }: GalleryProps): ReactNode => {
   if(media?.images) mediaArray = [...mediaArray, ...media.images]
   
   const [ currentSlide, setCurrentSlide ] = useState<number>(1);
+  const [ playing, setPlaying ] = useState(false);
   const firstImage = useRef<Image>(null);
 
   const slide = (dir:"left"|"right") => {
@@ -31,8 +33,28 @@ export const Gallery = ({ media, width }: GalleryProps): ReactNode => {
     }
   }
 
+  const onStateChange = useCallback((state: string) => {
+    if (state === "ended") {
+      setPlaying(false);
+    }
+  }, []);
+
+  const togglePlaying = useCallback(() => {
+    setPlaying((prev) => !prev);
+  }, []);
+
+
   return(
     <View>
+      {media.links?.length
+        ?<YouTubePlayer
+          height={200}
+          play={playing}
+          videoId={media.links[0].video.split("=").at(-1)}
+          onChangeState={onStateChange}
+        />
+        :""
+      }
       <View style={{flexDirection: 'row', overflow: "hidden"}}>
         {mediaArray.map((mediaEl: string, i: number)=> 
           <Image
