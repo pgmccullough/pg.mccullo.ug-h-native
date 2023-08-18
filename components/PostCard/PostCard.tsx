@@ -9,14 +9,18 @@ import {
 } from 'react-native';
 import { stampToTime } from '../../common/functions';
 import RenderHtml, { defaultSystemFonts } from 'react-native-render-html';
+import { Gallery } from '../PostCardGallery/Gallery';
+import type { PostFeedback, PostMedia } from '../../common/types';
 const systemFonts = [...defaultSystemFonts, 'JosefinSans-Regular'];
 
 type PostCardProps = PropsWithChildren<{
-  title: string;
-  date?: number;
+  title: string,
+  date?: number,
+  media?: PostMedia,
+  feedback?: PostFeedback
 }>;
 
-export const PostCard = ({children, date, title}: PostCardProps): ReactNode => {
+export const PostCard = ({children, date, media, feedback, title}: PostCardProps): ReactNode => {
   const isDarkMode = useColorScheme() === 'dark';
   const { width } = useWindowDimensions();
   return (
@@ -40,14 +44,20 @@ export const PostCard = ({children, date, title}: PostCardProps): ReactNode => {
       <View
         style={styles.postCardContent}
       >
-      <RenderHtml
-        baseStyle={{fontSize: 16, fontFamily: 'JosefinSans-Regular', lineHeight: 24, padding: 16}}
-        contentWidth={width}
-        source={{html: children?.toString()||""}}
-        systemFonts={systemFonts}
-      />
-    
-    </View>
+        {media
+          ?<Gallery
+            media={media}
+            width={width-22}
+          />
+          :""
+        }
+        <RenderHtml
+          baseStyle={{fontSize: 16, fontFamily: 'JosefinSans-Regular', lineHeight: 24, padding: 16}}
+          contentWidth={width}
+          source={{html: children?.toString()||""}}
+          systemFonts={systemFonts}
+        />
+      </View>
     </>
   );
 };

@@ -97,6 +97,8 @@ function App(): JSX.Element {
             <PostCard 
               key={post._id}
               date={post.created}
+              feedback={post.feedback}
+              media={post.media}
               title=""
             >
               {post.content}

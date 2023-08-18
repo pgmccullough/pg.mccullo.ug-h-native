@@ -17,26 +17,30 @@ export interface UserClean {
   }
 }
 
+export interface PostFeedback {
+  commentsOn: boolean,
+  comments: any,
+  sharesOn: boolean,
+  shares: any,
+  likesOn: boolean,
+  likes: any,
+}
+
+export interface PostMedia {
+  audio: any,
+  directory?: string,
+  files: any[]|null,
+  images: any[]|null,
+  links: any[]|null,
+  videos: any[]|null,
+}
+
 export interface Post {
   _id: string,
   content: string,
   created: number,
-  feedback: {
-      commentsOn: any,
-      comments: any,
-      sharesOn: any,
-      shares: any,
-      likesOn: any,
-      likes: any,
-  },
+  feedback: PostFeedback,
   lastEdited: number,
-  media: any|{
-      audio: any,
-      directory?: string,
-      files: any[]|null,
-      images: any[]|null,
-      links: any[]|null,
-      videos: any[]|null,
-  }
+  media: PostMedia,
   privacy: "Public"|"Followers"|"Friends"|"Self"|"Save Media"|"Story"
 }
